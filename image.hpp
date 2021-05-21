@@ -3,8 +3,8 @@
 #include <array>
 #include <cstddef>
 #include <cstdint>
-#include <vector>
 #include <ostream>
+#include <vector>
 
 using Pixel = std::uint8_t;
 struct Image {
@@ -15,7 +15,6 @@ struct Image {
         return data.at(x + _h * y);
     }
 
-    // std::array<Pixel, 28 * 28> data;
     std::vector<Pixel> data;
 
    private:

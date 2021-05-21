@@ -16,7 +16,7 @@ find_package(range-v3 REQUIRED)
 
 nn_add_test(network_test)
 nn_add_test(mnist_reader_test)
-target_compile_definitions(mnist_reader_test PRIVATE MNIST_DIR="${CMAKE_SOURCE_DIR}")
+nn_add_test(image_recognition_test)
 
 add_executable(picture_printer picture_printer.cpp)
 target_compile_features(picture_printer PUBLIC cxx_std_20)

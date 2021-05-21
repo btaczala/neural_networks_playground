@@ -37,7 +37,7 @@ TEST(NetworkRuntime, create) {
 
     const std::vector<double> input(inputLayerSize, 1);
     ASSERT_EQ(input.size(), inputLayerSize);
-    const auto prediction = nn.calculate(input, sigmoid);
+    const auto prediction = nn.predict(input, sigmoid);
     EXPECT_GT(10, prediction.sum());
     EXPECT_GT(prediction.sum(), 0);
 }

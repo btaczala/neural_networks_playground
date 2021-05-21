@@ -33,7 +33,7 @@ struct NetworkRuntime {
     }
 
     template <typename ActivationFunction>
-    Eigen::MatrixXd calculate(const std::vector<double>& input,
+    Eigen::MatrixXd predict(const std::vector<double>& input,
                               ActivationFunction&& fn) {
         Eigen::MatrixXd inputVector{input.size(), 1};
         std::copy(input.begin(), input.end(), inputVector.data());

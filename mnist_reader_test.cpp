@@ -1,11 +1,11 @@
 #include "mnist_reader.hpp"
 
+#include <fmt/format.h>
 #include <gtest/gtest.h>
 
 #include <filesystem>
 
 const std::string kMnistDir = MNIST_DIR;
-
 namespace fs = std::filesystem;
 
 TEST(mnist_reader, train_images_idx3_ubyte) {
@@ -24,6 +24,10 @@ TEST(mnist_reader, train_labels_idx3_ubyte) {
 
 TEST(mnist_reader_labels, fetchNLabel) {
     MNistReaderLabelSet labels{fs::path(kMnistDir) / "train-labels-idx1-ubyte"};
+
+    const auto label = labels.readLabel(0);
+    // EXPECT_TRUE(label >= 0 && label <= 9);
+    EXPECT_EQ(label, 5);
 }
 
 struct MNistReaderImageSetTest : public ::testing::Test {
@@ -68,9 +72,7 @@ TEST_F(MNistReaderImageSetTest, image0) {
 
     std::stringstream ss;
     const auto im = images.readImage(0);
-
     ss << im;
-
     EXPECT_EQ(ss.str(), data);
 }
 

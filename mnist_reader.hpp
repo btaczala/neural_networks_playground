@@ -38,28 +38,27 @@ struct MNistReader {
         _file.seekg(position, std::ios::beg);
         T value;
         _file.read(reinterpret_cast<char*>(&value), sizeof(T));
-
-        if constexpr (std::is_integral_v<T>) {
-            return swapBytes(static_cast<std::uint32_t>(value));
-        } else {
-            return value;
-        }
+        return value;
     }
 
     std::uint32_t magicHeader() const {
-        return readFromPosition<std::uint32_t>(0);
+        return swapBytes(readFromPosition<std::uint32_t>(0));
     }
 
-    std::uint32_t count() const { return readFromPosition<std::uint32_t>(4); }
+    std::uint32_t count() const {
+        return swapBytes(readFromPosition<std::uint32_t>(4));
+    }
 
    protected:
     mutable std::fstream _file;
 };
 
 struct MNistReaderImageSet : public MNistReader {
-    std::uint32_t rows() const { return readFromPosition<std::uint32_t>(8); }
+    std::uint32_t rows() const {
+        return swapBytes(readFromPosition<std::uint32_t>(8));
+    }
     std::uint32_t columns() const {
-        return readFromPosition<std::uint32_t>(12);
+        return swapBytes(readFromPosition<std::uint32_t>(12));
     }
 
     Image readImage(std::size_t position) {
@@ -73,5 +72,8 @@ struct MNistReaderImageSet : public MNistReader {
 };
 
 struct MNistReaderLabelSet : public MNistReader {
-    std::int32_t readLabel(std::size_t N) { return 0; }
+    std::int8_t readLabel(std::size_t N) {
+        const std::size_t position = 8 + N;
+        return readFromPosition<std::int8_t>(position);
+    }
 };

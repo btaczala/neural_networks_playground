@@ -2,6 +2,7 @@ macro(nn_add_test programName)
     add_executable(${programName} ${programName}.cpp)
     target_link_libraries(${programName} fmt::fmt GTest::gtest GTest::gtest_main Eigen3::Eigen3 range-v3::range-v3)
     target_compile_features(${programName} PUBLIC cxx_std_20)
+    target_compile_definitions(${programName} PRIVATE MNIST_DIR="${CMAKE_SOURCE_DIR}")
 
     include(GoogleTest)
     gtest_discover_tests(${programName})
