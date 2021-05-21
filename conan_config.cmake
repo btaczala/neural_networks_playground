@@ -6,6 +6,8 @@ conan_cmake_configure(
   gtest/1.10.0
   eigen/3.3.9
   range-v3/0.11.0
+  lodepng/cci.20200615
+  cxxopts/2.2.1
   GENERATORS cmake_find_package
 )
 

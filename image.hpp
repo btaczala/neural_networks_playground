@@ -15,6 +15,9 @@ struct Image {
         return data.at(x + _h * y);
     }
 
+    std::size_t w() const { return _w; }
+    std::size_t h() const { return _h; }
+
     std::vector<Pixel> data;
 
    private:

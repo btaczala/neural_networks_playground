@@ -61,7 +61,7 @@ struct MNistReaderImageSet : public MNistReader {
         return swapBytes(readFromPosition<std::uint32_t>(12));
     }
 
-    Image readImage(std::size_t position) {
+    Image readImage(std::size_t position) const {
         constexpr const std::size_t imageOffset = 16;
         const std::size_t startPosition = imageOffset + 28 * 28 * position;
         _file.seekg(startPosition, std::ios::beg);
